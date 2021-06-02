@@ -1,0 +1,358 @@
+/*! Author: Asif Mughal (www.codehim.com) */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	
+}
+
+.cm-login {
+	background: #19092b;
+        position: relative;
+	color: rgba(255, 255, 255, 0.90);
+}
+
+.cm-login-form {
+	user-select: none;
+	-webkit-user-select: none;
+	padding: 20px;
+}
+
+.cm-login-form .cm-text-input {
+	background: rgba(255, 255, 255, 0.5);
+	padding: 10px;
+	display: black;
+	width: 100%;
+	border: 0;
+	outline: 0;
+	border-radius: 16px;
+	margin: 15px 0;
+}
+
+.cm-text-input::placeholder {
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.cm-login-form .fa {
+	color: rgba(255, 255, 255, 0.45);
+}
+
+.remember-me,
+a.lost-pass {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.75);
+	display: block;
+	margin: 10px 0;
+}
+
+.social-login {
+	text-align: center;
+	margin-top: 30px;
+	color: rgba(255, 255, 255, 0.75);
+}
+
+.social-login p {
+	margin: 10px;
+	font-size: 13px;
+	text-align: left;
+}
+
+
+/* Social Buttons */
+
+.cm-btn {
+	text-decoration: none;
+	display: inline-block;
+	padding: 10px;
+	border-radius: 2px;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-fb {
+	background: #3b5998
+}
+
+.btn-tw {
+	background: #00acee
+}
+
+.btn-lk {
+	background: #0077B5
+}
+
+.btn-fb:before,
+.btn-tw:before,
+.btn-lk {
+	font-family: FontAwesome;
+}
+
+.btn-fb:before {
+	content: '\f09a'
+}
+
+.btn-tw:before {
+	content: '\f099'
+}
+
+.btn-lk:before {
+	content: '\f0e1'
+}
+
+
+/* Toggle Button */
+
+.cm-toggle {
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+	position: relative;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.cm-toggle:after {
+	content: '';
+	width: 36px;
+	height: 14px;
+	display: inline-block;
+	background: rgba(255, 255, 255, 0.45);
+	border-radius: 18px;
+	clear: both;
+}
+
+.cm-toggle:before {
+	content: '';
+	width: 18px;
+	height: 18px;
+	display: block;
+	position: absolute;
+	left: 0;
+	top: -3px;
+	border-radius: 50%;
+	background: rgb(255, 255, 255);
+	box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.cm-toggle:checked:before {
+	left: 18px;
+	box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.cm-toggle:checked:after {
+	background: #16a085;
+}
+
+.cm-toggle,
+.cm-toggle:before,
+.cm-toggle:after,
+.cm-toggle:checked:before,
+.cm-toggle:checked:after {
+	transition: ease .3s;
+	-webkit-transition: ease .3s;
+	-moz-transition: ease .3s;
+	-o-transition: ease .3s;
+}
+
+
+/* Submit Button */
+
+.cm-submit {
+	-webkit-appearance: none;
+	background: #EB3349;
+	/* fallback for old browsers */
+	background: -webkit-linear-gradient(to top, #F45C43, #EB3349);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to top, #F45C43, #EB3349);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	padding: 10px 16px;
+	border: 0;
+	width: 100%;
+	border-radius: 16px;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+
+.cm-submit2 {
+	-webkit-appearance: none;
+	background: #EB3349;
+	/* fallback for old browsers */
+	background: -webkit-linear-gradient(to top, #153e97, #153e97);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to top, #153e97, #153e97);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	padding: 10px 16px;
+	border: 0;
+	margin-top: 10px;
+	width: 100%;
+	border-radius: 16px;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+.btn-submit:focus {
+	outline: 0;
+}
+
+.cm-btn,
+.btn-submit {
+	-webkit-tap-highlight-color: transparent;
+	transition: .3s;
+	cursor: pointer;
+}
+
+.cm-btn:hover,
+.cm-submit:hover {
+	opacity: 0.9;
+	transition: .3s;
+}
+
+
+/* Animation */
+
+@keyframes slideLeft {
+	from {
+		left: -100%;
+	}
+	to {
+		left: 100px;
+	}
+}
+
+
+/* Responsive PC view*/
+
+@media only screen and (min-width: 480px) {
+	.cm-login  {
+		background-color: black;
+		background-size: cover;
+		right: 	-70PX;
+		min-height: 580px;
+	}
+	.cm-login-form {
+		position: absolute;
+		top: 25px;
+		left: 100px;
+		width: 1050px;
+		height: 700px;
+		z-index: 5;
+		box-shadow: 1px 1px 5px 1px rgba(255, 255, 255, 0.65);
+		position: relative;
+		background: rgba(255, 255, 255, 0.25);
+		border: 1px solid rgba(255, 255, 255, 0.65);
+		animation: slideLeft 1s ease forwards;
+		-webkit-animation: slideLeft 1s ease forwards;
+	}
+	/* Dim background effect */
+
+	.cm-login:before {
+		content: "";
+		background-color: rgba(0, 0, 0, .25);
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		overflow: hidden;
+		z-index: 2;
+	}
+}
+legend {
+background-color:black;
+color: white;
+padding: 5px 10px;
+}
+  
+fieldset{
+	padding: 5px;
+}
+
+#demo{
+	color:white;
+	font-size: 25px;
+	font-weight: 500;
+	
+	
+}
+
+.search{
+	background-color: white;
+	color: black;
+	width: 100%;
+	height: 60%;
+	margin-top: 20px;
+	padding: 10px;
+	font-weight: 900px;
+	
+}
+
+label{
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.display_data{
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block;
+	flex:left;
+}
+
+
+.blockchain-container-data{
+	width: 100%;
+	display: inline-flex;
+	padding-left: 30px;
+}
+
+.block-chain-50{
+	width: 50%;
+}
+
+.block-chain-25{
+	width: 60%;
+	font-weight: 600;
+	
+}
+
+.block-chain-75{
+	width: 75%;
+	color: blue;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.display-inline-flex{ 
+	display: inline-flex;
+}
+
+.tabledata{
+	padding: 5px;
+	background-color:white;
+	color:black;
+	width: 100%;
+
+}
+
+.head{
+	font-size: 12px;
+	padding: 7px;
+	text-align: center;
+	width: 100px;
+	border-bottom: 2px solid black ;
+	border-right: 2px solid black ;
+	background-color: powderblue;
+}
+
+td{
+	font-size: 10px;
+	padding: 7px;
+	text-align: center;
+	border-bottom: 2px solid black ;
+	border-right: 2px solid black ;
+	font-weight: 700;
+}

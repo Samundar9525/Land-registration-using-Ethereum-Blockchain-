@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body{
+  background: #1D212B;
+}
+
+section{
+  min-height: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section:nth-child(1){
+  color: #fff;
+}
+
+section:nth-child(2){
+  color: #1D212B;
+  background: #fff;
+}
+
+section:nth-child(3){
+  color: #fff;
+}
+
+section:nth-child(4){
+  color: #1D212B;
+  background: #fff;
+}
+
+section .container{
+  margin: 100px;
+}
+
+section h1{
+  font-size: 60px;
+}
+
+section h2{
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+section .cards{
+  display: flex;
+}
+
+section .cards .text-card{
+  background: #2696E9;
+  margin: 20px;
+  padding: 20px;
+}
+
+section .cards .text-card h3{
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 500px){
+  section h1{
+    font-size: 40px;
+  }
+
+  section .cards{
+    flex-direction: column;
+  }
+}
+
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: all 2s ease;
+}
+
+.reveal.active{
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.alig{
+  width: 80%;
+  margin-left: 20%;
+}
+
+.aligl{
+  width: 20%;
+}

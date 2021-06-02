@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
+	<link rel="stylesheet" href="./css/datasheetstyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="../css/datasheet.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+</head>
+
+<body>
+
+	<div class="menu-btn">
+		<i class="fas fa-bars"></i>
+	</div>
+	<div class="side-bar">
+		<div class="close-btn">
+			<i class="fas fa-times"></i>
+		</div>
+		<div class="menu">
+			<div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
+			<div class="item">
+				<a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i
+						class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="#" class="sub-item">Users</a>
+					<a href="#" class="sub-item">Assets</a>
+
+				</div>
+			</div>
+			<div class="item"><a href="search.html"><i class="fas fa-th"></i>Search</a></div>
+			<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Mutation</a></div>
+			<div class="item"><a href="datasheet.html"><i class="fa fa-database"></i>Records</a></div>
+			<div class="item"><a href="Khatiyan.html"><i class="fa fa-database"></i>Vendor list</a></div>
+			<div class="item">
+				<a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="#" class="sub-item">User Profile</a>
+					<a href="#" class="sub-item">Land Data</a>
+				</div>
+			</div>
+			<!-- ------------------------------------------------main class yahan describe kiya gaya hai -------------------------------------------->
+		</div>
+	</div>
+	<section class="main">
+		<div id="search">
+			<section class="cm-logins">
+				<form class="cm-login-form" onsubmit="return false">
+					<fieldset>
+						<center>
+							<legend>Land Record</legend>
+						</center>
+						<button type="submit" class="cm-submit2" onclick="displayrecords()"> Click here to see all users
+							land records </button>
+					</fieldset>
+					<br>
+					<div class="tabledata" id="tableshow" style="display: none;">
+						<table id="myytab">
+							<tr>
+								<th class="head">Account no</th>
+								<th class="head">Name</th>
+								<th class="head">Gender</th>
+								<th class="head">Address</th>
+								<th class="head">land location</th>
+								<th class="head">District</th>
+								<th class="head">Plot no</th>
+								<th class="head">Area(sqft)</th>
+								<th class="head">Asset value </th>
+								<th class="head">Phone no</th>
+							</tr>
+						</table>
+					</div>
+				</form>
+			</section>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			//jquery for toggle sub menus
+			$('.sub-btn').click(function () {
+				$(this).next('.sub-menu').slideToggle();
+				$(this).find('.dropdown').toggleClass('rotate');
+			});
+
+			//jquery for expand and collapse the sidebar
+			$('.menu-btn').click(function () {
+				$('.side-bar').addClass('active');
+				$('.menu-btn').css("visibility", "hidden");
+			});
+
+			$('.close-btn').click(function () {
+				$('.side-bar').removeClass('active');
+				$('.menu-btn').css("visibility", "visible");
+			});
+		});
+
+		// -------------------------------------------------yahan se apna funda start hota hai----------------------------------
+
+		async function fetch_data() {
+			var web3 = new Web3("http://localhost:7545");
+			var ar = await web3.eth.getAccounts()
+			var n = (ar.length)
+			for (let i = 0; i < n; i++) {
+				func(ar[i])
+			}
+		}
+
+		async function func(form_account) {
+			let storage = await init();
+			var fetch_name;
+			var fetch_gender;
+			var fetch_address;
+			var fetch_phone;
+			var fetch_plotarea;
+			var fetch_plotdistrict;
+			var fetch_plotlocation;
+			var fetch_plotno;
+			var fetch_plotprice;
+
+
+
+			var da1 = await storage.methods.get_user(form_account).call()
+
+			var da2 = await storage.methods.get_asset(form_account).call()
+
+			if (da1[0] == "Not Found") {
+				return
+			}
+			var table = document.getElementById("myytab");
+			var row = table.insertRow(1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			var cell6 = row.insertCell(5);
+			var cell7 = row.insertCell(6);
+			var cell8 = row.insertCell(7);
+			var cell9 = row.insertCell(8);
+			var cell10 = row.insertCell(9);
+
+			cell1.innerHTML = form_account;
+			cell2.innerHTML = da1[0];
+			cell3.innerHTML = da1[1];
+			cell4.innerHTML = da1[2];
+			cell5.innerHTML = da2[0];
+			cell6.innerHTML = da2[1];
+			cell7.innerHTML = da2[2];
+			cell8.innerHTML = da2[3];
+			cell9.innerHTML = da2[4];
+			cell10.innerHTML = da1[3];
+		}
+
+		function displayrecords() {
+			fetch_data()
+			var x = document.getElementById("tableshow");
+			x.style.display = "block";
+		}
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/login-form.css">
+    <link rel="stylesheet" href="../css/demo.css">
+  </head>
+  <body>
+
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-bar">
+      <div class="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="menu">
+        <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
+        <div class="item">
+          <a class="sub-btn"><i class="fas fa-table"></i>Register<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item" onclick="register_fun()"> Users</a>
+            <a href="#" class="sub-item" onclick="register_fun_assest()">Assets</a>
+            
+          </div>
+        </div>
+        <div class="item"><a href="search.html" ><i class="fas fa-th"></i>Search</a></div>
+		<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Mutation</a></div>
+        <div class="item"><a href="datasheet.html"><i class="fa fa-database"></i>Records</a></div>
+		<div class="item"><a href="Khatiyan.html"><i class="fa fa-database"></i>Vendor list</a></div>
+        <div class="item">
+          <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">User Profile</a>
+            <a href="#" class="sub-item">Land Data</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <section class="main">
+      <div id="register" style="display: none;">
+        <section class="cm-login">
+          <center><p id="demo"> Welcome To Land Registy User Enrollment Portal</p></center>
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>User Register</legend></center>
+             <input type="text" id="account_no" class="cm-text-input" placeholder="Account No">
+             <input type="text" id="name" class="cm-text-input" placeholder="Name">
+             <input type="text" id="Gender" class="cm-text-input" placeholder="Gender">
+             <input type="text" id="Address" class="cm-text-input" placeholder="Address">
+             <input type="text" id="phone" class="cm-text-input" placeholder="Contact no">
+             <input type="text" id="password" class="cm-text-input" placeholder="password">
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="createaccount()"> Create Profile </button>
+          </form>
+       </section>
+      </div>
+
+      <div id="register_asset" style="display: none;">
+        <section class="cm-login">
+          <center><p id="demo"> Welcome To Assets Enrollment Portal</p></center>
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Assest Register</legend></center>
+             <input type="text" id="account_no_asset" class="cm-text-input" placeholder="Account No">
+             <input type="text" id="Location" class="cm-text-input" placeholder="Location">
+             <input type="text" id="District" class="cm-text-input" placeholder="District">
+             <input type="text" id="Plot_no" class="cm-text-input" placeholder="Plot No">
+             <input type="text" id="Area" class="cm-text-input" placeholder="Area (in sqft)">
+             <input type="text" id="Assest_value" class="cm-text-input" placeholder="Assest Value">
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="create_asset()"> Register Assest</button>
+          </form>
+       </section>
+      </div>
+    </section>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+    <script type="text/javascript">
+    var storage;
+    $(document).ready(async function(){
+      //jquery for toggle sub menus
+      storage = await init();
+      $('.sub-btn').click(function(){
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+      });
+
+      //jquery for expand and collapse the sidebar
+      $('.menu-btn').click(function(){
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+      });
+
+      $('.close-btn').click(function(){
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+      });
+    });
+// buttton call ka function likha hua hai
+    function register_fun() {
+      var y=document.getElementById("register_asset");
+      y.style.display = "none";
+      var x = document.getElementById("register");
+      console.log("hello");
+      x.style.display = "block";
+    }
+    function register_fun_assest() {
+      var y=document.getElementById("register");
+      y.style.display = "none";
+      var x = document.getElementById("register_asset");
+      console.log("hello");
+      x.style.display = "block";
+    }
+    // --------------------------yahan apna raj hai apan function bayega yaha--------------------------------------
+    
+   
+//---------------------------------------------------------------------------end------------------------------------------------------------- 
+       
+      
+      function createaccount() {
+      var form_account=document.getElementById("account_no").value;
+      var form_name=document.getElementById("name").value;
+      var form_gender=document.getElementById("Gender").value;
+      var form_address=document.getElementById("Address").value;
+      var form_phone=document.getElementById("phone").value;
+      var form_password=document.getElementById("password").value;
+    storage.methods.add_user(form_account, form_name,form_gender,form_address,form_phone,form_password).send({
+		from: form_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("data bhara gaya")
+     })
+   }
+// -------------------------------------------------------------yahan assest creation ka function hai ------------------------------------------
+    function create_asset() {
+       
+      var form_account=document.getElementById("account_no_asset").value;
+      var form_location=document.getElementById("Location").value;
+      var form_district=document.getElementById("District").value;
+      var form_plot=document.getElementById("Plot_no").value;
+      var form_area=document.getElementById("Area").value;
+      var form_asset=document.getElementById("Assest_value").value;
+      console.log(form_account, form_location,form_district,form_plot,form_area,form_asset);
+     storage.methods.add_asset(form_account, form_location,form_district,form_plot,form_area,form_asset).send({
+		from: form_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("data bhara gaya")
+     })
+	 storage.methods.add_khatiyan(form_plot,form_account).send({
+		from:form_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("Khatiyan updated")
+     })
+
+	 
+   }
+    </script>
+
+  </body>
+</html>

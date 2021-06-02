@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
+	<link rel="stylesheet" href="./css/datasheetstyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="../css/khatiyan.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+</head>
+
+<body>
+
+	<div class="menu-btn">
+		<i class="fas fa-bars"></i>
+	</div>
+	<div class="side-bar">
+		<div class="close-btn">
+			<i class="fas fa-times"></i>
+		</div>
+		<div class="menu">
+			<div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
+			<div class="item">
+				<a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i
+						class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="#" class="sub-item">Users</a>
+					<a href="#" class="sub-item">Assets</a>
+
+				</div>
+			</div>
+			<div class="item"><a href="search.html"><i class="fas fa-th"></i>Search</a></div>
+			<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Mutation</a></div>
+			<div class="item"><a href="datasheet.html"><i class="fa fa-database"></i>Records</a></div>
+			<div class="item"><a href="Khatiyan.html"><i class="fa fa-database"></i>Vendor list</a></div>
+			<div class="item">
+				<a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="#" class="sub-item">User Profile</a>
+					<a href="#" class="sub-item">Land Data</a>
+				</div>
+			</div>
+			<!-- ------------------------------------------------main class yahan describe kiya gaya hai -------------------------------------------->
+		</div>
+	</div>
+	<section class="main">
+		<div id="search">
+			<section class="cm-logins">
+				<form class="cm-login-form" onsubmit="return false">
+					<fieldset>
+						<center>
+							<legend>Vendor list</legend>
+						</center>
+						<input type="text" id="plot_no" class="cm-text-input" placeholder="Enter the plot number">
+						<button type="submit" class="cm-submit2" onclick="myFunction()"> Click to show the vendor list
+						</button>
+					</fieldset>
+					<br>
+					<div>
+						<div class="tabledata1" id="tabledata1" style="display: none;">
+							<h5 style="font-size: 25px; font-weight: 800px;">
+								<center><strong></strong>Current Owner</strong></center>
+							</h5><br>
+							<h5> Plot.No</h5>
+							<p style="color: red; font-weight: 900" id="_plot">....</p>
+							<div class="dat">
+								<h5 id="_name">Please </h5>
+							</div>
+							<div class="dat">
+								<h5 id="_location">Wait ..</h5>
+							</div>
+
+
+						</div>
+
+						<div class="tabledata" id="tableshow" style="display: block;">
+							<table id="myytab">
+								<tr>
+								</tr>
+							</table>
+
+						</div>
+				</form>
+
+			</section>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		var storage;
+		$(document).ready(async function () {
+			storage = await init();
+			//jquery for toggle sub menus
+			$('.sub-btn').click(function () {
+				$(this).next('.sub-menu').slideToggle();
+				$(this).find('.dropdown').toggleClass('rotate');
+			});
+
+			//jquery for expand and collapse the sidebar
+			$('.menu-btn').click(function () {
+				$('.side-bar').addClass('active');
+				$('.menu-btn').css("visibility", "hidden");
+			});
+
+			$('.close-btn').click(function () {
+				$('.side-bar').removeClass('active');
+				$('.menu-btn').css("visibility", "visible");
+			});
+		});
+
+		async function myFunction() {
+			console.log("hello")
+			var x = document.getElementById("tabledata1");
+			x.style.display = "block";
+
+			var plot = document.getElementById("plot_no").value;
+			document.getElementById("_plot").innerHTML = plot
+			var p = await storage.methods.get_khatiyan(plot).call();
+			console.log(p[0]);
+			var c = p[1]
+			var t = p[1]
+			ac = p[0][t - 1]
+			console.log(t)
+			for (var i = p[1] - 1; i >= 0; i--) {
+
+				storage.methods.get_user(p[0][i]).call().then((response) => {
+					console.log(response[0])
+					var table = document.getElementById("myytab");
+					var row = table.insertRow(1);
+					var cell1 = row.insertCell(0);
+					cell1.innerHTML = `vendor: ${c} &nbsp;&nbsp;  ${response[0]}`;
+					c = c - 1;
+				})
+
+
+			}
+
+
+			console.log(ac)
+			storage.methods.get_user(ac).call().then((response) => {
+
+				document.getElementById("_name").innerHTML = response[0]
+				document.getElementById("_location").innerHTML = response[2]
+				console.log(response)
+			})
+			console.log(p[0][i]);
+
+		}
+  // -------------------------------------------------yahan se apna funda start hota hai----------------------------------
+	</script>
+</body>
+
+</html>

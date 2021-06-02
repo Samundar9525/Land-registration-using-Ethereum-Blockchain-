@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/mutation.css">
+    <link rel="stylesheet" href="../css/demo.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+  </head>
+  <body>
+
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-bar">
+      <div class="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="menu">
+        <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
+        <div class="item">
+          <a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">Users</a>
+            <a href="#" class="sub-item">Assets</a>
+            
+          </div>
+        </div>
+        <div class="item"><a href="search.html"><i class="fas fa-th"></i>Search</a></div>
+		<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Mutation</a></div>
+    <div class="item"><a href="datasheet.html"><i class="fa fa-database"></i>Records</a></div>
+    <div class="item"><a href="Khatiyan.html"><i class="fa fa-database"></i>Vendor list</a></div>
+        <div class="item">
+          <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">User Profile</a>
+            <a href="#" class="sub-item">Land Data</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------- -->
+    <center><p id="demo" style="padding-top: 40px;"> Transfer Power of Attorney </p></center>
+    <section class="main">
+      <div id="search">
+        <section class="cm-login">
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Vendor </legend></center>
+             <input type="text" id="vendor_account_no" class="cm-text-input" placeholder="Enter Account Number">
+             
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="displayvendor()"> fetch </button>
+             
+             <div class="search" id="search_container_vendor" style="display: none;">
+              <div  style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Owner Detail</div> <span></span>
+               <div class="blockchain-container-data ">
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-25 ">Owner Name</div>
+                    <div class="block-chain-25 ">Phone no</div>
+                    <div class="block-chain-25 ">location</div>
+                    <div class="block-chain-25 ">District</div>
+                    <div class="block-chain-25 ">Plot no</div>
+                    <div class="block-chain-25 ">Plot area</div>
+                    <div class="block-chain-25 ">Plot Price</div>
+
+                    
+                  </div>
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-75 " id="owner_name"></div>
+                    <div class="block-chain-75" id="owner_phone"></div>
+                    <div class="block-chain-75 " id="owner_location"></div>
+                    <div class="block-chain-75 " id="owner_district"></div>
+                    <div class="block-chain-75 " id="owner_plotno"></div>
+                    <div class="block-chain-75" id="owner_plotarea"></div>
+                    <div class="block-chain-75 " id="owner_plotprice"></div>
+                    
+                    
+                  </div>
+                  
+                  
+               </div>
+             </div>
+
+             </div>
+
+             
+          </form>
+          
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Vandee</legend></center>
+             <input type="text" id="buyer_account_no" class="cm-text-input" placeholder="Enter Account Number">
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="displayvandee()"> fetch</button>
+             
+             <div class="search" id="search_container_buyer" style="display: none;">
+              <div  style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Buyer Detail</div> <span></span>
+               <div class="blockchain-container-data ">
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-25 ">Buyer Name</div>
+                    <div class="block-chain-25 ">Phone no</div>
+                    <div class="block-chain-25 ">location</div>
+                    <div class="block-chain-25 ">District</div>
+                    <div class="block-chain-25 ">Plot no</div>
+                    <div class="block-chain-25 ">Plot area</div>
+                    <div class="block-chain-25 ">Plot Price</div>
+
+                    
+                  </div>
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-75 " id="buyer_name"></div>
+                    <div class="block-chain-75" id="buyer_phone"></div>
+                    <div class="block-chain-75 " id="buyer_location"></div>
+                    <div class="block-chain-75 " id="buyer_district"></div>
+                    <div class="block-chain-75 " id="buyer_plotno"></div>
+                    <div class="block-chain-75" id="buyer_plotarea"></div>
+                    <div class="block-chain-75 " id="buyer_plotprice"></div>
+                    
+                    
+                  </div>
+                  
+                  
+               </div>
+             </div>
+
+             </div>
+
+          </form>
+       </section>
+
+      </div>
+    </section>
+
+    <button style="background-color: green; color: white; margin-left:875px;z-index: 9999; position: absolute;top: 58%; width: 100px; height: 40px;" onclick="transfer()">Transfer</button>
+	<button style="background-color: green; color: white; margin-left:875px;z-index: 9999; position: absolute;top: 68%; width: 100px; height: 40px;" onclick="validate()">Validate</button>
+
+
+
+    <script type="text/javascript">
+	var storage;
+    $(document).ready(async function(){
+		storage = await init()
+      //jquery for toggle sub menus
+      $('.sub-btn').click(function(){
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+      });
+
+      //jquery for expand and collapse the sidebar
+      $('.menu-btn').click(function(){
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+      });
+
+      $('.close-btn').click(function(){
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+      });
+    });
+
+// -------------------------------------------------yahan se apna funda start hota hai----------------------------------
+        function vendor(){
+          var form_account=document.getElementById("vendor_account_no").value;
+          
+          storage.methods.get_user(form_account).call().then((response) => {
+                console.log(response);
+                document.getElementById("owner_name").innerHTML=response[0]
+                document.getElementById("owner_phone").innerHTML=response[3]
+
+            })
+            storage.methods.get_asset(form_account).call().then((response) => {
+                console.log(response);
+                document.getElementById("owner_location").innerHTML=response[0]
+                document.getElementById("owner_district").innerHTML=response[1]
+                document.getElementById("owner_plotno").innerHTML=response[2]
+                document.getElementById("owner_plotarea").innerHTML=response[3]
+                document.getElementById("owner_plotprice").innerHTML=(response[4])
+            })
+        }
+
+        function vandee(){
+          var form_account=document.getElementById("buyer_account_no").value;
+          
+          storage.methods.get_user(form_account).call().then((response) => {
+                console.log(response);
+                document.getElementById("buyer_name").innerHTML=response[0]
+                document.getElementById("buyer_phone").innerHTML=response[3]
+
+            })
+
+            storage.methods.get_asset(form_account).call().then((response) => {
+                console.log(response);
+                document.getElementById("buyer_location").innerHTML=response[0]
+                document.getElementById("buyer_district").innerHTML=response[1]
+                document.getElementById("buyer_plotno").innerHTML=response[2]
+                document.getElementById("buyer_plotarea").innerHTML=response[3]
+                document.getElementById("buyer_plotprice").innerHTML=(response[4])
+
+            })
+        }
+    
+    function displayvendor() {
+    vendor()
+    var x = document.getElementById("search_container_vendor");
+    x.style.display = "block";
+   }
+
+   function displayvandee() {
+    vandee()
+    var x = document.getElementById("search_container_buyer");
+    x.style.display = "block";
+   }
+
+    function transfer() {
+     console.log("Transfer call ho raha hai--------------------")
+    var form_seller_account=document.getElementById("vendor_account_no").value;
+    var form_buyer_account=document.getElementById("buyer_account_no").value;
+	console.log(form_buyer_account)
+
+    var owner_district=document.getElementById("owner_district").innerHTML
+    var owner_location=document.getElementById("owner_location").innerHTML
+    var owner_plotno=document.getElementById("owner_plotno").innerHTML
+    var owner_plotarea=document.getElementById("owner_plotarea").innerHTML
+    var owner_plotprice= document.getElementById("owner_plotprice").innerHTML
+
+     storage.methods.add_asset(form_buyer_account,owner_location,owner_district,owner_plotno,owner_plotarea,owner_plotprice).send({
+		from:form_seller_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("data bhara gaya")
+     })
+	 storage.methods.add_khatiyan(owner_plotno,form_buyer_account).send({
+		from:form_seller_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("Khatiyan updated")
+     })
+
+
+	//  storage.methods.add_khatiyan(owner_plotno,form_buyer_account).call().then((response) => {
+    //         console.log("Khatiyan updated ")
+	//  })
+
+    //    storage.methods.remove_user(form_vendor_account).call().then((response) => {
+    //         console.log("data delete ho gaya ")
+
+    //       	document.getElementById("owner_district").innerHTML="Not Found"
+    //       	document.getElementById("owner_location").innerHTML="Not Found"
+    //       	document.getElementById("owner_plotno").innerHTML="Not Found"
+    //       	document.getElementById("owner_plotarea").innerHTML="Not Found"
+    //       	document.getElementById("owner_plotprice").innerHTML="Not Found"
+    //   })
+    displayvandee()
+   }
+           
+   function validate(){
+	var form_seller_account=document.getElementById("vendor_account_no").value;
+	var form_buyer_account=document.getElementById("buyer_account_no").value;
+	console.log(form_seller_account)
+	console.log(storage.methods)
+
+	let valu=document.getElementById("owner_plotprice").innerHTML;
+  valu=valu/150000
+	storage.methods.remove_user(form_seller_account).send({
+		from:form_buyer_account,
+	 	gas: 4700000,
+		// value:Web3.util.toWei(valu)
+		value: Web3.utils.toWei(valu.toString(), 'ether'),
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("data delete ho gaya ")
+     })
+          	document.getElementById("owner_district").innerHTML="Not Found"
+          	document.getElementById("owner_location").innerHTML="Not Found"
+          	document.getElementById("owner_plotno").innerHTML="Not Found"
+          	document.getElementById("owner_plotarea").innerHTML="Not Found"
+          	document.getElementById("owner_plotprice").innerHTML="Not Found"
+    } 
+
+  </script>
+  </body>
+</html>

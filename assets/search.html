@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar menu With Sub-menus | Using HTML, CSS & JQuery</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../css/login-form.css">
+  <link rel="stylesheet" href="../css/demo.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script type="text/javascript" src="../app.js"></script>
+</head>
+
+<body>
+
+  <div class="menu-btn">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="side-bar">
+    <div class="close-btn">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="menu">
+      <div class="item"><a href="#"><i class="fas fa-desktop"></i>Dashboard</a></div>
+      <div class="item">
+        <a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i
+            class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">Users</a>
+          <a href="#" class="sub-item">Assets</a>
+
+        </div>
+      </div>
+      <div class="item"><a href="search.html"><i class="fas fa-th"></i>Search</a></div>
+      <div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Mutation</a></div>
+      <div class="item"><a href="datasheet.html"><i class="fa fa-database"></i>Records</a></div>
+      <div class="item"><a href="Khatiyan.html"><i class="fa fa-database"></i>Vendor list</a></div>
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">User Profile</a>
+          <a href="#" class="sub-item">Land Data</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <section class="main">
+    <div id="search">
+      <section class="cm-login">
+        <center>
+          <p id="demo"> Search your Land Record </p>
+        </center>
+        <form class="cm-login-form" onsubmit="return false">
+          <fieldset>
+            <center>
+              <legend>Land Record (Register II)</legend>
+            </center>
+            <input type="text" id="account_no" class="cm-text-input" placeholder="Enter Account Number">
+
+          </fieldset>
+          <button type="submit" class="cm-submit2" onclick="displaydata()"> search </button>
+
+          <div class="search" id="search_container" style="display: none;">
+            <center>
+              <h2 style="text-decoration: underline ;">Land Details</h2>
+            </center>
+            <div style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Personal Detail
+            </div> <span></span>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Name</div>
+                <div class="block-chain-75" id="search_name"></div>
+              </div>
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Gender</div>
+                <div class="block-chain-75" id="search_gender"></div>
+              </div>
+            </div>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Address</div>
+                <div class="block-chain-75" id="search_address"></div>
+              </div>
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Phone</div>
+                <div class="block-chain-75" id="search_phone"></div>
+              </div>
+            </div>
+            <br><br>
+
+            <div style="font-weight: bold; padding-bottom: 5px; color: darkgreen;">Property Detail</div> <span></span>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Land Location</div>
+                <div class="block-chain-75" id="search_location"></div>
+              </div>
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">District</div>
+                <div class="block-chain-75" id="search_district"></div>
+              </div>
+            </div>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Plot no</div>
+                <div class="block-chain-75" id="search_plotno"></div>
+              </div>
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Area </div>
+                <div class="block-chain-75" id="search_area"> </div>
+              </div>
+            </div>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Asset value </div>
+                <div class="block-chain-75" id="search_assetvalue" style="color: red;"></div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
+    </div>
+    </form>
+  </section>
+  </div>
+  </section>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      //jquery for toggle sub menus
+      $('.sub-btn').click(function () {
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+      });
+
+      //jquery for expand and collapse the sidebar
+      $('.menu-btn').click(function () {
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+      });
+
+      $('.close-btn').click(function () {
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+      });
+    });
+
+    // -------------------------------------------------yahan se apna funda start hota hai----------------------------------
+
+    async function search_data() {
+      let storage = await init();
+
+      var form_account = document.getElementById("account_no").value;
+      var fetch_name;
+      var fetch_gender;
+      var fetch_address;
+      var fetch_phone;
+      var fetch_plotarea;
+      var fetch_plotdistrict;
+      var fetch_plotlocation;
+      var fetch_plotno;
+      var fetch_plotprice;
+
+
+      let self = this;
+      self.user_data = {
+        "fetch_name": "ssss",
+        "fetch_gender": null,
+        "fetch_address": null,
+        "fetch_phone": null,
+        "fetch_plotlocation": null,
+        "fetch_plotdistrict": null,
+        "fetch_plotno": null,
+        "fetch_plotarea": null,
+        "fetch_plotprice": null
+      };
+
+      new Promise((resolve, reject) => {
+        return storage.methods.get_user(form_account).call().then((response) => {
+          let keys = Object.keys(response);
+          self.user_data.fetch_name = response[keys[0]];
+          document.getElementById("search_name").innerHTML = response[keys[0]]
+          document.getElementById("search_gender").innerHTML = response[keys[1]]
+          document.getElementById("search_address").innerHTML = response[keys[2]]
+          document.getElementById("search_phone").innerHTML = response[keys[3]]
+          return resolve(self.user_data);
+        })
+      }).then((data) => {
+        console.log(data["fetch_name"]);
+        fetch_name = data["fetch_name"]
+      }).catch((err) => {
+        console.log(err);
+        throw reject(err);
+      })
+
+      new Promise((resolve, reject) => {
+        return storage.methods.get_asset(form_account).call().then((response) => {
+          let keys = Object.keys(response);
+
+          document.getElementById("search_location").innerHTML = response[0]
+          document.getElementById("search_district").innerHTML = response[1]
+          document.getElementById("search_plotno").innerHTML = response[2]
+          document.getElementById("search_area").innerHTML = response[3] + " (sqft)"
+          document.getElementById("search_assetvalue").innerHTML = response[4] + " (₹)"
+
+          self.user_data.fetch_plotlocation = response[0];
+          self.user_data.fetch_plotdistrict = response[1];
+          self.user_data.fetch_plotno = response[2];
+          self.user_data.fetch_plotarea = response[3];
+          self.user_data.fetch_plotprice = response[3];
+          return resolve(self.user_data);
+        })
+      }).then((data) => {
+        console.log(data["fetch_plotprice"]);
+
+      }).catch((err) => {
+        console.log(err);
+        throw reject(err);
+      })
+      console.log(self.user_data)
+      console.log(user_data["fetch_name"])
+    }
+
+
+    function displaydata() {
+      search_data()
+      var x = document.getElementById("search_container");
+      x.style.display = "block";
+    }
+  </script>
+
+</body>
+
+</html>
