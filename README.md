@@ -2,7 +2,7 @@
 Land Registration and transfer system using Blockchain
 
 # prerequisite:
-1.Node
+1.Node.js
 
 2.ganache --  download from here https://www.trufflesuite.com/ganache
 
