@@ -28,7 +28,6 @@
           <div class="sub-menu">
             <a href="#" class="sub-item">Users</a>
             <a href="#" class="sub-item">Assets</a>
-            
           </div>
         </div>
         <div class="item"><a href="search.html"><i class="fas fa-th"></i>Search</a></div>
@@ -54,7 +53,7 @@
             <fieldset>
              <center><legend>Vendor </legend></center>
              <input type="text" id="vendor_account_no" class="cm-text-input" placeholder="Enter Account Number">
-             
+             <input type="text" id="vendor_password" class="cm-text-input" placeholder="Enter Password">
              </fieldset>
              <button type="submit" class="cm-submit2" onclick="displayvendor()"> fetch </button>
              
@@ -97,6 +96,7 @@
             <fieldset>
              <center><legend>Vandee</legend></center>
              <input type="text" id="buyer_account_no" class="cm-text-input" placeholder="Enter Account Number">
+             <input type="text" id="buyer_password" class="cm-text-input" placeholder="Enter Password"> 
              </fieldset>
              <button type="submit" class="cm-submit2" onclick="displayvandee()"> fetch</button>
              
@@ -167,8 +167,7 @@
 
 // -------------------------------------------------yahan se apna funda start hota hai----------------------------------
         function vendor(){
-          var form_account=document.getElementById("vendor_account_no").value;
-          
+          var form_account=document.getElementById("vendor_account_no").value;          
           storage.methods.get_user(form_account).call().then((response) => {
                 console.log(response);
                 document.getElementById("owner_name").innerHTML=response[0]
@@ -205,25 +204,10 @@
 
             })
         }
-    
-    function displayvendor() {
-    vendor()
-    var x = document.getElementById("search_container_vendor");
-    x.style.display = "block";
-   }
 
-   function displayvandee() {
-    vandee()
-    var x = document.getElementById("search_container_buyer");
-    x.style.display = "block";
-   }
-
-    function transfer() {
-     console.log("Transfer call ho raha hai--------------------")
+        function init_transfer(){
     var form_seller_account=document.getElementById("vendor_account_no").value;
     var form_buyer_account=document.getElementById("buyer_account_no").value;
-	console.log(form_buyer_account)
-
     var owner_district=document.getElementById("owner_district").innerHTML
     var owner_location=document.getElementById("owner_location").innerHTML
     var owner_plotno=document.getElementById("owner_plotno").innerHTML
@@ -246,41 +230,28 @@
            console.log(response)
            console.log("Khatiyan updated")
      })
+     displayvandee()
+    }
+   
 
-
-	//  storage.methods.add_khatiyan(owner_plotno,form_buyer_account).call().then((response) => {
-    //         console.log("Khatiyan updated ")
-	//  })
-
-    //    storage.methods.remove_user(form_vendor_account).call().then((response) => {
-    //         console.log("data delete ho gaya ")
-
-    //       	document.getElementById("owner_district").innerHTML="Not Found"
-    //       	document.getElementById("owner_location").innerHTML="Not Found"
-    //       	document.getElementById("owner_plotno").innerHTML="Not Found"
-    //       	document.getElementById("owner_plotarea").innerHTML="Not Found"
-    //       	document.getElementById("owner_plotprice").innerHTML="Not Found"
-    //   })
-    displayvandee()
-   }
-           
-   function validate(){
-	var form_seller_account=document.getElementById("vendor_account_no").value;
+function init_money_transfer(){
+  var form_seller_account=document.getElementById("vendor_account_no").value;
 	var form_buyer_account=document.getElementById("buyer_account_no").value;
+  var buyer_password=document.getElementById("buyer_password").value;
 	console.log(form_seller_account)
 	console.log(storage.methods)
-
+  
 	let valu=document.getElementById("owner_plotprice").innerHTML;
   valu=valu/150000
 	storage.methods.remove_user(form_seller_account).send({
 		from:form_buyer_account,
 	 	gas: 4700000,
-		// value:Web3.util.toWei(valu)
+
 		value: Web3.utils.toWei(valu.toString(), 'ether'),
 	 	gasPrice: '2000000000'
 		}).then((response) => {
+      alert("Money Transferred Sucessfully")
            console.log(response)
-           console.log("data delete ho gaya ")
      })
           	document.getElementById("owner_district").innerHTML="Not Found"
           	document.getElementById("owner_location").innerHTML="Not Found"
@@ -288,6 +259,56 @@
           	document.getElementById("owner_plotarea").innerHTML="Not Found"
           	document.getElementById("owner_plotprice").innerHTML="Not Found"
     } 
+
+    function displayvendor() {
+    vendor()
+    var x = document.getElementById("search_container_vendor");
+    x.style.display = "block";
+   }
+
+   function displayvandee() {
+    vandee()
+    var x = document.getElementById("search_container_buyer");
+    x.style.display = "block";
+   }
+
+    function transfer() {
+     console.log("Transfer call ho raha hai--------------------")
+    var form_seller_account=document.getElementById("vendor_account_no").value;
+    var form_buyer_account=document.getElementById("buyer_account_no").value;
+    var seller_password=document.getElementById("vendor_password").value;
+
+    storage.methods.get_user(form_seller_account).call().then((response) => {
+                console.log(response[4]);
+               if (seller_password==response[4]){
+                     init_transfer();
+               }
+               else{
+                 alert("     Acesss Denied   Enter Correct Password   ");
+                 location .reload();
+               }
+            })
+   }
+   
+           
+  function validate(){
+	var form_seller_account=document.getElementById("vendor_account_no").value;
+	var form_buyer_account=document.getElementById("buyer_account_no").value;
+  var buyer_password=document.getElementById("buyer_password").value;
+	console.log(form_seller_account)
+	console.log(storage.methods)
+
+    storage.methods.get_user(form_buyer_account).call().then((response) => {
+                console.log(response);
+               if (buyer_password==response[4]){
+                    init_money_transfer();
+               }
+               else{
+                 alert("     Acesss Denied   Enter Correct Password   ");
+                 location.reload();
+               }
+            }) 
+  }
 
   </script>
   </body>
